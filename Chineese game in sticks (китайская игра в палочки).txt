@@ -1,0 +1,54 @@
+ЗАДАНИЕ 5
+Древняя китайская игра в палочки.
+
+Играют два игрока.  Есть 10 палочек. Игроки по очереди берут от одной до трёх палочек. Играют до тех пор пока не закончатся палочки. Тот кто взял последним - тот проиграл.
+Реализуйте игру таким образом, чтобы могли играть два человека. Изначально есть 10 палочек. На каждом ходу выводите на консоль текущее количество оставшихся палочек и просите ввести количество палочек, которое хочет взять игрок 
+(который делает ход). Не забывайте менять очерёдность игроков и сокращать кол-во палочек. В конце надо вывести кто победил - первый или второй игрок.
+
+Код:
+number_of_sticks = 10
+player_turn = 1
+
+while number_of_sticks !=0:
+    print(f'How many sticks you take? Remaining {number_of_sticks}')
+    taken = int(input())
+
+    if taken < 1 or taken >3:
+        print('You can take only fron 1 to 3 sticks.')
+        continue
+    number_of_sticks -= taken
+    print(f'Sticks taken: {taken}\n')
+
+    if number_of_sticks <=0:
+        print(f'No more sticks in game. \nPlayer {player_turn} has lost!')
+
+    player_turn = 1 if player_turn == 2 else 2
+
+#or
+
+number_of_sticks = 10
+player_turn = 1
+
+def can_take(sticks):
+    return sticks >= 1 and sticks <= 3
+
+def switch_player_turn(turn):
+    return 1 if player_turn == 2 else 2
+
+def end_of_game(sticks):
+    return number_of_sticks <=0
+
+while (not end_of_game(number_of_sticks)):
+    print(f'How many sticks you take? Remaining {number_of_sticks}')
+    taken = int(input())
+    
+    if not can_take(taken):
+        print('You can take only fron 1 to 3 sticks.')
+        continue
+    number_of_sticks -= taken
+    print(f'Sticks taken: {taken}\n')
+    
+    if end_of_game(number_of_sticks):
+        print(f'No more sticks in game. \nPlayer {player_turn} has lost!')
+    
+    player_turn = switch_player_turn(player_turn)

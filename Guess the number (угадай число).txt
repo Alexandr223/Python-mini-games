@@ -1,0 +1,19 @@
+Угадай число
+Компьютер загадывает число от 1 до 50, а игрок должен угадать это число за 6 попыток.
+
+Код:
+x = random.randint(1, 50)
+tries=0
+while tries<6:
+    a=int(input())
+    tries +=1
+    if a<x:
+        print('Число больше введенного.')
+    if a>x:
+        print('Число меньше введенного.')
+    if a==x:
+        print('Yes!')
+        break
+    if a != x and tries == 6:
+        print('You lose!')
+        break
